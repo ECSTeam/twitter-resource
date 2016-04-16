@@ -7,7 +7,7 @@ mkdir ${build_dir} > /dev/null
 set -e
 set -x
 
-export GOPATH=`pwd`/gopath:${basedir}/Godeps/_workspace
+export GOPATH=`pwd`/gopath:${basedir}/cmd/out/Godeps/_workspace
 
 go build -o ${build_dir}/check ${basedir}/cmd/check
 go build -o ${build_dir}/in ${basedir}/cmd/in
