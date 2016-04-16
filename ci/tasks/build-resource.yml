@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image: docker:///golang#1.6-alpine
+
+inputs:
+- name: source-code
+  path: gopath/src/github.com/ECSTeam/twitter-resource
+
+outputs:
+- name: build-output/build
+
+run:
+  path: gopath/src/github.com/ECSTeam/twitter-resource/ci/tasks/build-source.sh
