@@ -14,7 +14,7 @@ resources:
 - name: source-code
   type: git
   source:
-    uri: git@github.com:ECSTeam/twitter-resource.git
+    uri: https://github.com/ECSTeam/twitter-resource.git
 - name: docker-hub
   type: docker-image
   source:
