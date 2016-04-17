@@ -10,12 +10,8 @@ import (
   "github.com/ChimeraCoder/anaconda"
 )
 
-func fileToBase64(file string) string {
-
-}
-
 func main() {
-  var request OutRequest
+  var request concourse.OutRequest
 
   concourse.ReadRequest(&request)
 
@@ -31,13 +27,13 @@ func main() {
     concourse.Sayf("Uploading file %v\n", imageFile)
     bytes, fileErr := ioutil.ReadFile(imageFile)
     if fileErr != nil {
-      concourse.Fatal(fileErr)
+      concourse.Fatal("Error reading file: %v\n", fileErr)
     }
 
     if media, err := api.UploadMedia(base64.StdEncoding.EncodeToString(bytes)); err != nil {
-      concourse.Fatal(err)
+      concourse.Fatal("Error uploading media: %v\n", err)
     } else {
-      uploadedMedia.Add("media_ids", media.MediaID)
+      uploadedMedia.Add("media_ids", media.MediaIDString)
     }
 
     concourse.Sayf("Upload of %v complete\n", imageFile)
@@ -49,7 +45,7 @@ func main() {
 
   output := concourse.OutResponse{}
   if tweet, err := api.PostTweet(statusText, uploadedMedia); err != nil {
-    concourse.Fatal(err)
+    concourse.Fatal("Error posting tweet: %v\n", err)
   } else {
     output.Version = concourse.Version{
       TweetId: tweet.IdStr,

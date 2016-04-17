@@ -19,13 +19,13 @@ func Sayf(message string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, message, args...)
 }
 
-func ReadRequest(request *interface{}) {
+func ReadRequest(request *OutRequest) {
   if err := json.NewEncoder(os.Stdin).Encode(request); err != nil {
     Fatal("Error reading request: %v\n", err)
   }
 }
 
-func WriteResponse(response interface{}) {
+func WriteResponse(response OutResponse) {
   if err := json.NewDecoder(os.Stdout).Decode(response); err != nil {
     Fatal("Error writing response: %v\n", err)
   }
