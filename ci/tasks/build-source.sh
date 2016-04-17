@@ -17,4 +17,4 @@ go build -o ${build_dir}/assets/in ./cmd/in
 go build -o ${build_dir}/assets/out ./cmd/out
 cd ${origbase}
 
-cp -a Dockerfile ${build_dir}
+cp -a ${basedir}/Dockerfile ${build_dir}
