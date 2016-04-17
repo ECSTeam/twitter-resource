@@ -1,0 +1,22 @@
+---
+resource_types:
+- name: twitter
+  type: docker-image
+  source:
+    repository: jghiloni/twitter-concourse-resource
+
+resources:
+- name: tweet
+  type: twitter
+  source:
+    consumer_key: Tss9Wp8kXFNxET9z0mSRgEBdX
+    consumer_secret: K3QWq7fw8BME4vfLh5JhrAAk4n2iNBydOEY2f9O2ZmNXZi7fAy
+    access_token: 2869479547-zsmlnbyZJtV0mkiQFbNQ7BTGTFWXi9aUTIicDPE
+    access_token_secret: RIXWmabgyyqmB38wMyEJuaHYrwrlAk2PqSBoeXXxgWlLx
+
+jobs:
+- name: do-tweet
+  plan:
+  - put: tweet
+    params:
+      status: This is the first tweet (build ${BUILD_ID}) from my custom @concourseci resource!
