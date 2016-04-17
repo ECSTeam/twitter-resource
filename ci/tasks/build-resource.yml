@@ -8,7 +8,7 @@ inputs:
   path: gopath/src/github.com/ECSTeam/twitter-resource
 
 outputs:
-- name: assets
+- name: build-output
 
 run:
   path: gopath/src/github.com/ECSTeam/twitter-resource/ci/tasks/build-source.sh

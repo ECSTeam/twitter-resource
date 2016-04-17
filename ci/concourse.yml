@@ -8,7 +8,8 @@ jobs:
     file: source-code/ci/tasks/build-resource.yml
   - put: docker-hub
     params:
-      build: source-code
+      build: build-output
+
 
 resources:
 - name: source-code
