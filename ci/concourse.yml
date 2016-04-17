@@ -22,5 +22,6 @@ resources:
   type: docker-image
   source:
     repository: jghiloni/twitter-concourse-resource
+    email: jghiloni@ecsteam.com
     username: jghiloni
     password: {{docker-hub-password}}
