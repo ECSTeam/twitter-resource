@@ -4,7 +4,6 @@ package concourse
 
 import (
   "fmt"
-  "log"
   "encoding/json"
   "os"
 
@@ -22,12 +21,12 @@ func Sayf(message string, args ...interface{}) {
 
 func ReadRequest(request *interface{}) {
   if err := json.NewEncoder(os.Stdin).Encode(request); err != nil {
-    Fatal(err)
+    Fatal("Error reading request: %v\n", err)
   }
 }
 
 func WriteResponse(response interface{}) {
   if err := json.NewDecoder(os.Stdout).Decode(response); err != nil {
-    Fatal(err)
+    Fatal("Error writing response: %v\n", err)
   }
 }
