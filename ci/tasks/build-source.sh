@@ -10,6 +10,7 @@ set -e
 
 export GOPATH=`pwd`/gopath:${basedir}/cmd/out/Godeps/_workspace
 
-go build -o ${build_dir}/check ${basedir}/cmd/check
-go build -o ${build_dir}/in ${basedir}/cmd/in
-go build -o ${build_dir}/out ${basedir}/cmd/out
+cd ${basedir}
+go build -o ${build_dir}/check ./cmd/check
+go build -o ${build_dir}/in ./cmd/in
+go build -o ${build_dir}/out ./cmd/out
