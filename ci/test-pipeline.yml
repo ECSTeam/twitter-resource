@@ -6,17 +6,26 @@ resource_types:
     repository: jghiloni/twitter-concourse-resource
 
 resources:
+- name: tweet-source
+  type: git
+  source:
+    uri: git@github.com:jghiloni/tweet-resource-sample.git
+    branch: master
+    private_key: {{github-private-key}}
 - name: tweet
   type: twitter
   source:
-    consumer_key: Tss9Wp8kXFNxET9z0mSRgEBdX
-    consumer_secret: K3QWq7fw8BME4vfLh5JhrAAk4n2iNBydOEY2f9O2ZmNXZi7fAy
-    access_token: 2869479547-zsmlnbyZJtV0mkiQFbNQ7BTGTFWXi9aUTIicDPE
-    access_token_secret: RIXWmabgyyqmB38wMyEJuaHYrwrlAk2PqSBoeXXxgWlLx
+    consumer_key: {{twitter-consumer-key}}
+    consumer_secret: {{twitter-consumer-secret}}
+    access_token: {{twitter-access-token}}
+    access_token_secret: {{twitter-access-token-secret}}
 
 jobs:
 - name: do-tweet
   plan:
+  - get: tweet-source
   - put: tweet
     params:
-      status: This is the first tweet (build ${BUILD_ID}) from my custom @concourseci resource!
+      media:
+      - tweet-source/logo.png
+      status: This is the first tweet with a picture (build ${BUILD_ID}) from my custom @concourseci resource!
