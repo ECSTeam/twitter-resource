@@ -24,6 +24,10 @@ func main() {
   uploadedMedia := url.Values{}
 
   for _, imageFile := range request.Params.Media {
+    if dir, direrr := os.Getwd(); direrr == nil {
+      concourse.Sayf("Working in dir %v\n", dir)
+    }
+    
     concourse.Sayf("Uploading file %v\n", imageFile)
     bytes, fileErr := ioutil.ReadFile(imageFile)
     if fileErr != nil {
