@@ -5,12 +5,19 @@ import (
   "io/ioutil"
   "net/url"
   "os"
+  "path"
 
   "github.com/ECSTeam/twitter-resource/concourse"
   "github.com/ChimeraCoder/anaconda"
 )
 
 func main() {
+  if len(os.Args) < 2 {
+    concourse.Fatal("Missing required working dir arg!")
+  }
+
+  workingDir := os.Args[1]
+
   var request concourse.OutRequest
 
   concourse.ReadRequest(&request)
@@ -27,7 +34,9 @@ func main() {
     if dir, direrr := os.Getwd(); direrr == nil {
       concourse.Sayf("Working in dir %v\n", dir)
     }
-    
+
+    imageFile = path.Join(workingDir, imageFile)
+
     concourse.Sayf("Uploading file %v\n", imageFile)
     bytes, fileErr := ioutil.ReadFile(imageFile)
     if fileErr != nil {
