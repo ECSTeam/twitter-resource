@@ -21,7 +21,7 @@ resources:
 - name: docker-hub
   type: docker-image
   source:
-    repository: jghiloni/twitter-concourse-resource
-    email: jghiloni@ecsteam.com
-    username: jghiloni
+    repository: ecsteam/twitter-concourse-resource
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
     password: {{docker-hub-password}}
