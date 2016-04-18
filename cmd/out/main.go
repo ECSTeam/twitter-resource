@@ -13,7 +13,7 @@ import (
 
 func main() {
   if len(os.Args) < 2 {
-    concourse.Fatal("Missing required working dir arg!")
+    concourse.Fatal("Missing required working dir arg!", "")
   }
 
   workingDir := os.Args[1]
