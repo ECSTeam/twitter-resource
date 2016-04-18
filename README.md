@@ -1,6 +1,7 @@
 # Twitter [Concourse](http://concourse.ci) Resource
 
-Send tweets when your [Concourse](http://concourse.ci) builds finish.
+Send tweets when your [Concourse](http://concourse.ci) builds finish. Compatible
+with Concourse 0.74+.
 
 ## Source Configuration
 
@@ -37,3 +38,41 @@ conform.
 ##### Optional:
 * `media`: An array of paths to images or video to upload. Any media referenced
   here will be uploaded and referenced by the resulting tweet.
+
+## Example Pipeline
+
+```yml
+---
+resource_types:
+- name: twitter
+  type: docker-image
+  source:
+    repository: jghiloni/twitter-concourse-resource
+
+resources:
+- name: tweet-source
+  type: git
+  source:
+    uri: git@github.com:jghiloni/tweet-resource-sample.git
+    branch: master
+    private_key: {{github-private-key}}
+- name: tweet
+  type: twitter
+  source:
+    consumer_key: {{twitter-consumer-key}}
+    consumer_secret: {{twitter-consumer-secret}}
+    access_token: {{twitter-access-token}}
+    access_token_secret: {{twitter-access-token-secret}}
+
+jobs:
+- name: do-tweet
+  plan:
+  - get: tweet-source
+  - put: tweet
+    params:
+      media:
+      - tweet-source/logo.png
+      status: >
+        This is the first tweet with a picture (build ${BUILD_ID})
+        from my custom @concourseci resource!
+```
