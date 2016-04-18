@@ -20,13 +20,13 @@ func Sayf(message string, args ...interface{}) {
 }
 
 func ReadRequest(request *OutRequest) {
-  if err := json.NewEncoder(os.Stdin).Encode(request); err != nil {
+  if err := json.NewDecoder(os.Stdin).Decode(request); err != nil {
     Fatal("Error reading request: %v\n", err)
   }
 }
 
 func WriteResponse(response OutResponse) {
-  if err := json.NewDecoder(os.Stdout).Decode(response); err != nil {
+  if err := json.NewEncoder(os.Stdout).Encode(response); err != nil {
     Fatal("Error writing response: %v\n", err)
   }
 }
