@@ -9,6 +9,7 @@ mkdir -p ${build_dir} > /dev/null
 set -e
 
 export GOPATH=`pwd`/gopath:${basedir}/cmd/out/Godeps/_workspace
+export CGO_ENABLED=0
 
 origbase=`pwd`
 cd ${basedir}
