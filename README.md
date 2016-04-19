@@ -47,7 +47,7 @@ resource_types:
 - name: twitter
   type: docker-image
   source:
-    repository: jghiloni/twitter-concourse-resource
+    repository: ecsteam/twitter-concourse-resource
 
 resources:
 - name: tweet-source
