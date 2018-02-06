@@ -53,8 +53,19 @@ func main() {
     concourse.Sayf("Upload of %v complete\n", imageFile)
   }
 
+  statusText := request.Params.Status
+  if request.Params.StatusFile != "" {
+    statusFileContent, fileErr := ioutil.ReadFile(path.Join(workingDir, request.Params.StatusFile))
+    if fileErr != nil {
+      concourse.Fatal("Error reading file: %v\n", fileErr)
+    } else {
+      statusText = string(statusFileContent)
+    }
+
+  }
+
   // expand any variables
-  statusText := os.ExpandEnv(request.Params.Status)
+  statusText = os.ExpandEnv(statusText)
   concourse.Sayf("Posting tweet '%s'\n", statusText)
 
   output := concourse.OutResponse{}

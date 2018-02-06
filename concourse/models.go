@@ -18,6 +18,7 @@ type MetadataPair struct {
 
 type OutParams struct {
   Status string `json:"status"`
+  StatusFile string `json:"statusFile"`
   Media []string `json:"media,omitempty"`
 }
 
